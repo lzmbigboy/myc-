@@ -1,0 +1,42 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define N 100
+int main() {
+    FILE *fp;
+    char str[N + 1];
+    //判断文件是否打开失败
+    if ( (fp = fopen("d:\\demo.txt", "rt")) == NULL ) {
+        puts("Fail to open file!");
+        exit(0);
+    }
+    //循环读取文件的每一行数据
+    while( fgets(str, N, fp) != NULL ) {
+        printf("%s", str);
+    }
+   
+    //操作结束后关闭文件
+    fclose(fp);
+    return 0;
+}
+
+////////////////////////////////////////////////////////
+
+#include <stdio.h>
+#define PATH  "example.txt"
+ 
+int main ()
+{
+  FILE * pFile;
+  pFile = fopen (PATH, "w" );//创建一个只读的example.txt
+  fputs ( "This is an apple." , pFile );//写入This is an apple.到example.txt 
+  fseek ( pFile , 9 , SEEK_SET ); //设置文件内部位置指针从文件的开始处偏移9个字节
+  fputs ( " sam" , pFile ); //在新的文件内部指针处写下sam，
+  //即将This is an apple.变成This is an sample.
+  fclose ( pFile );
+  pFile = fopen(PATH, "r");
+  char data[100];
+  while((fgets(data,1024,pFile))!=NULL) {
+         printf("%s", data);
+  }
+  return 0;
+  }
